@@ -1,4 +1,7 @@
 import Button from '../ui/button';
+import DateIcon from '../icons/date-icon';
+import AddressIcon from '../icons/address-icon';
+import ArrowRightIcon from '../icons/arrow-right-icon';
 import styles from './eventItem.module.css';
 
 function EventItem({ title, image, data, location, id }) {
@@ -19,13 +22,20 @@ function EventItem({ title, image, data, location, id }) {
           <h2>{title}</h2>
           <div className={styles.date}>
             <time>{humanReadableData}</time>
+            <DateIcon />
           </div>
           <div className={styles.address}>
             <address>{formatedAddress}</address>
+            <AddressIcon />
           </div>
         </div>
         <div className={styles.actions}>
-          <Button link={exploreLink}>Explore events</Button>
+          <Button link={exploreLink}>
+            <span>Explore events</span>
+            <span className={styles.icon}>
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
