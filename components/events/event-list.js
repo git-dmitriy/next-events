@@ -1,5 +1,5 @@
-import EventItem from './eventItem';
-import styles from './eventList.module.css';
+import EventItem from './event-item';
+import styles from './event-list.module.css';
 
 function EventList({ items }) {
   return (

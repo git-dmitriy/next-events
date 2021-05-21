@@ -2,7 +2,7 @@ import Button from '../ui/button';
 import DateIcon from '../icons/date-icon';
 import AddressIcon from '../icons/address-icon';
 import ArrowRightIcon from '../icons/arrow-right-icon';
-import styles from './eventItem.module.css';
+import styles from './event-item.module.css';
 
 function EventItem({ title, image, data, location, id }) {
   const humanReadableData = new Date(data).toLocaleDateString('en-US', {
