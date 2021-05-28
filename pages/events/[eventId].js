@@ -8,13 +8,17 @@ import Button from '../../components/ui/button';
 function EventDetailPage(props) {
   const event = props.selectedEvent;
 
+  const pageHeadContent = (
+    <Head>
+      <title>{event.title}</title>
+      <meta name='description' content={event.description} />
+    </Head>
+  );
+
   if (!event) {
     return (
       <>
-        <Head>
-          <title>{event.title}</title>
-          <meta name='description' content={event.description} />
-        </Head>
+        {pageHeadContent}
         <div className='center'>
           <p>Loading...</p>
         </div>
@@ -27,6 +31,7 @@ function EventDetailPage(props) {
 
   return (
     <>
+      {pageHeadContent}
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
