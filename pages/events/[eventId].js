@@ -1,9 +1,9 @@
+import Head from 'next/head';
 import { getEventById, getFeaturedEvents } from '../../helpers/api-utilities';
 import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventContent from '../../components/event-detail/event-content';
 import Button from '../../components/ui/button';
-import ErrorAlert from '../../components/ui/error-alert';
 
 function EventDetailPage(props) {
   const event = props.selectedEvent;
@@ -11,6 +11,10 @@ function EventDetailPage(props) {
   if (!event) {
     return (
       <>
+        <Head>
+          <title>{event.title}</title>
+          <meta name='description' content={event.description} />
+        </Head>
         <div className='center'>
           <p>Loading...</p>
         </div>
