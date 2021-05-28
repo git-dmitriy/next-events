@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import EventList from '../../components/events/event-list';
@@ -11,6 +12,8 @@ function FilteredEventsPage(props) {
   const { data, error } = useSWR(
     'https://next-events-5820c-default-rtdb.asia-southeast1.firebasedatabase.app/events.json'
   );
+  const router = useRouter();
+  const filteredDate = router.query.slug;
 
   useEffect(() => {
     if (data) {
@@ -26,18 +29,37 @@ function FilteredEventsPage(props) {
     }
   }, [data]);
 
-  const router = useRouter();
-  const filteredData = router.query.slug;
+  let pageHeadContent = (
+    <Head>
+      <title>Filtered event</title>
+      <meta name='description' content={'A list of filtered events.'} />
+    </Head>
+  );
 
   if (!loadedEvents) {
-    return <p className='center'>Loading...</p>;
+    return (
+      <>
+        {pageHeadContent}
+        <p className='center'>Loading...</p>
+      </>
+    );
   }
 
-  const filteredYear = filteredData[0];
-  const filteredMonth = filteredData[1];
+  const filteredYear = filteredDate[0];
+  const filteredMonth = filteredDate[1];
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+  pageHeadContent = (
+    <Head>
+      <title>Filtered event</title>
+      <meta
+        name='description'
+        content={`All events for ${numMonth}/${numYear} date.`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(numYear) ||
@@ -50,6 +72,7 @@ function FilteredEventsPage(props) {
   ) {
     return (
       <>
+        {pageHeadContent}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -73,6 +96,7 @@ function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadContent}
         <ErrorAlert>
           <p>No events found for this filter.</p>
         </ErrorAlert>
@@ -84,11 +108,11 @@ function FilteredEventsPage(props) {
   }
   return (
     <>
+      {pageHeadContent}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
   );
 }
-
 
 export default FilteredEventsPage;
