@@ -59,7 +59,6 @@ function Comments(props) {
           message: 'Successfully add new comment.',
           status: 'success',
         });
-        console.log('Response data', data);
       })
       .catch((err) => {
         notificationCtx.showNotification({
