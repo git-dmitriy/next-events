@@ -16,8 +16,14 @@ First clone this repository
 
 ```bash
 git clone https://github.com/git-dmitriy/next-events.git
+```
 
+```bash
 cd next-events
+```
+
+```bash
+npm install
 ```
 
 Second add api key (MONGODB_URI) to access to mongodb
@@ -26,8 +32,6 @@ Third run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
